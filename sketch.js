@@ -6,62 +6,60 @@ let myFont;
 let dragX, dragY;
 
 
-function preload(){ 
+function preload() {
   img = loadImage("0140.jpg");
   myFont = loadFont('FiraCode-Regular.ttf');
 }
 
 function setup() {
-  let c =  createCanvas(960, 1200);
+  let c = createCanvas(960, 1200);
   image(img, 0, 0);
   textFont(myFont);
   textSize(14);
-//  savedMouse = new PVector(0, 0);
 }
 
 function draw() {
-  copy(img, 0, height-20, width, height, 0, height-20, width, height);  
-   
+  copy(img, 0, height - 20, width, height, 0, height - 20, width, height);
+
   if (mouseIsPressed) {
     copy(img, dragX, dragY, sizeX, sizeY, mouseX, mouseY, sizeX, sizeY);
   }
-  
+
   fill(255);
   textAlign(CENTER);
-  text("size x: "+ sizeX +"  size y: "+sizeY, width/2, height-5);
+  text("size x: " + sizeX + "  size y: " + sizeY, width / 2, height - 5);
 }
 
-function mousePressed() { // Move black circle
+function mousePressed() {
   dragX = mouseX;
   dragY = mouseY;
 }
 
-function keyPressed() { 
-   if (key === 's') {
-      saveCanvas(c, 'gen_exploration', 'jpg');
+function keyPressed() {
+  if (key === 's') {
+    saveCanvas(c, 'gen_exploration', 'jpg');
   }
-  
+
   if (key == 'r') {
-    image (img, 0, 0);
+    image(img, 0, 0);
   }
 
-    if (keyCode == UP_ARROW) {
-      sizeX = sizeX+25;
+  if (keyCode == RIGHT_ARROW) {
+    sizeX = sizeX + 25;
+  }
+  if (keyCode == LEFT_ARROW) {
+    sizeX = sizeX - 25;
+    if (sizeX == 0) {
+      sizeX = sizeX + 25;
     }
-    if (keyCode == DOWN_ARROW) {
-      sizeX = sizeX-25;
-      if ( sizeX == 0) {
-        sizeX = sizeX+25;
-      }
+  }
+  if (keyCode == UP_ARROW) {
+    sizeY = sizeY + 25;
+  }
+  if (keyCode == DOWN_ARROW) {
+    sizeY = sizeY - 25;
+    if (sizeY == 0) {
+      sizeY = sizeY + 25;
     }
-    if (keyCode == RIGHT_ARROW) {
-      sizeY = sizeY+25;
-    }
-    if (keyCode == LEFT_ARROW){
-      sizeY = sizeY-25;
-     if ( sizeY == 0) {
-      sizeY = sizeY+25;
-      }
-    }
+  }
 }
-
